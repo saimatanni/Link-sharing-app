@@ -16,51 +16,17 @@ export const DetailsProvider = ({ children }) => {
   });
 
   // State for links
-  const [links, setLinks] = useState([
+  const [profileLinks, setProfileLinks] = useState([
     {
       id: 1,
-      platform: "GitHub",
-      url: "https://github.com/benwright",
-      color: "black",
+      platform: "",
+      url: "",
+      color: "",
     },
+   
+    
     {
       id: 2,
-      platform: "YouTube",
-      url: "https://youtube.com/benwright",
-      color: "red",
-    },
-    {
-      id: 4,
-      platform: "GitHub",
-      url: "https://github.com/benwright",
-      color: "blue",
-    },
-    // {
-    //   id: 5,
-    //   platform: "YouTube",
-    //   url: "https://youtube.com/benwright",
-    //   color: "green",
-    // },
-    // {
-    //   id: 6,
-    //   platform: "YouTube",
-    //   url: "https://youtube.com/benwright",
-    //   color: "red",
-    // },
-    // {
-    //   id: 7,
-    //   platform: "GitHub",
-    //   url: "https://github.com/benwright",
-    //   color: "blue",
-    // },
-    // {
-    //   id: 8,
-    //   platform: "YouTube",
-    //   url: "https://youtube.com/benwright",
-    //   color: "green",
-    // },
-    {
-      id: 3,
       platform: "",
       url: "",
       color: "",
@@ -73,22 +39,24 @@ export const DetailsProvider = ({ children }) => {
   };
 
   // Function to add, update, or remove a link
-  const addLink = (newLink) => setLinks([...links, newLink]);
+  const addLink = (newLink) => setProfileLinks([...profileLinks, newLink]);
   const updateLink = (updatedLink) => {
-    setLinks(
-      links.map((link) => (link.id === updatedLink.id ? updatedLink : link))
+    setProfileLinks(
+      profileLinks.map((link) => (link.id === updatedLink.id ? updatedLink : link))
     );
   };
   const removeLink = (linkId) => {
-    setLinks(links.filter((link) => link.id !== linkId));
+    setProfileLinks(profileLinks.filter((link) => link.id !== linkId));
   };
 
   return (
     <DetailsContext.Provider
       value={{
         profileDetails,
+        setProfileDetails,
         updateProfileDetails,
-        links,
+        profileLinks,
+        setProfileLinks,
         addLink,
         updateLink,
         removeLink,

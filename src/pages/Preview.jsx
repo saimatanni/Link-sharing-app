@@ -11,7 +11,7 @@ const platformIcons = {
 };
 
 const MobilePreview = () => {
-  const { profileDetails, links } = useDetails();
+  const { profileDetails, profileLinks } = useDetails();
 
   // Ensure we have 5 slots, filling with placeholders if links are missing
   // const displayLinks = [...links, ...Array(5 - links.length).fill({})].slice(
@@ -19,8 +19,8 @@ const MobilePreview = () => {
   //   5
   // );
   const displayLinks = [
-    ...links,
-    ...Array(Math.max(5 - links.length, 0)).fill({}),
+    ...profileLinks,
+    ...Array(Math.max(5 - profileLinks.length, 0)).fill({}),
   ];
   // Check if profile data is complete
   const isProfileLoaded =
@@ -82,11 +82,11 @@ const MobilePreview = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg ${
-                      link.color === "black"
+                      link.platform === "GitHub"
                         ? "bg-black"
-                        : link.color === "red"
+                        : link.platform === "YouTube"
                         ? "bg-red-500"
-                        : link.color === "blue"
+                        : link.platform === "LinkedIn"
                         ? "bg-blue-500"
                         : "bg-gray-200 text-gray-300"
                     }`}
