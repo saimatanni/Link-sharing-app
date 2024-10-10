@@ -114,7 +114,7 @@ const CustomLink = () => {
           + Add new link
         </button>
 
-        <div className="max-h-[60vh] pr-2 min-h-full custom-scrollbar overflow-y-auto mb-4">
+        <div className="h-[55vh] min-h-full pr-2  custom-scrollbar overflow-y-auto mb-4">
           {links.map((link, index) => (
             <DraggableLink
               key={link.id}
@@ -126,7 +126,9 @@ const CustomLink = () => {
               removeLink={removeLink}
             />
           ))}
-          <div className="flex justify-end w-full mb-4">
+         
+        </div>
+        <div className="flex justify-end w-full mb-4">
             <button
               onClick={handleSave}
               className="flex items-center w-auto px-4 py-2 text-white bg-[#633bfe] rounded-md hover:opacity-90"
@@ -138,8 +140,6 @@ const CustomLink = () => {
               )}
             </button>
           </div>
-        </div>
-
         {successMessage && (
           <div className="fixed px-4 py-2 text-sm text-white transform -translate-x-1/2 bg-black rounded-lg shadow-lg bottom-4 left-1/2">
             {successMessage}

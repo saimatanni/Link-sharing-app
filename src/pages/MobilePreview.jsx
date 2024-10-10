@@ -30,7 +30,7 @@ const MobilePreview = () => {
       >
         <div className="w-[280px] h-[560px] sm:w-[308px] sm:h-[480] lg:w-[360px] lg:h-[560px] flex items-center justify-center">
           {/* Inner Scrollable Content Container */}
-          <div className="w-[240px] h-[480px] sm:w-[250px] sm:h-[440px] lg:w-[250px] lg:max-h-[480px] bg-white rounded-[20px] md:rounded-[30px] overflow-y-auto p-4 sm:p-6 custom-scrollbar">
+          <div className="w-[240px] h-[480px] sm:w-[250px] sm:h-[440px] lg:w-[250px] lg:max-h-[480px] bg-white rounded-[20px] md:rounded-[30px] overflow-hidden hover:overflow-y-auto p-4 sm:p-6 custom-scrollbar">
             {/* Profile Section */}
             <div className="flex flex-col items-center justify-center">
               {profileDetails.profileImage ? (
