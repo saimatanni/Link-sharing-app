@@ -12,9 +12,9 @@ function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-10 flex items-center justify-between p-4 mx-4 mt-4 bg-white border border-gray-200 rounded-lg shadow-sm md:px-8">
       {/* Logo Section */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 cursor-pointer">
         <img alt="logo" src={logo} className="w-6 h-6 md:h-8 md:w-8" />
-        <span className="hidden text-lg font-bold text-gray-800 md:inline">
+        <span className="hidden text-lg font-extrabold text-gray-800 md:inline">
           devlinks
         </span>
       </div>
