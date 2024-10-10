@@ -50,6 +50,6 @@ Follow these instructions to set up the project on your local machine.
 
 
 ---
-Design and develop :heart: by **Shaima Alam Tanni**.
+Design and Developed with :heart: by **Shaima Alam Tanni**.
 
  
