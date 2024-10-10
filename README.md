@@ -32,6 +32,7 @@ Follow these instructions to set up the project on your local machine.
 
    ```bash
    git clone https://github.com/your-username/link-sharing-app.git
-   cd link-sharing-app
-   npm install
-   npm run dev
+  
+  - cd link-sharing-app
+  - npm install
+  - npm run dev
