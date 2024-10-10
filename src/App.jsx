@@ -1,15 +1,20 @@
 import "./App.css";
-
-import Body from "./pages/Body";
 import { Routes, Route } from "react-router-dom";
-import PreviewLinks from "./pages/PreviewLinks";
+import React, { Suspense, lazy } from "react";
+
+// Lazy-load the components
+const Body = lazy(() => import("./pages/Body"));
+const PreviewLinks = lazy(() => import("./pages/PreviewLinks"));
+
 function App() {
   return (
     <div>
-      <Routes>
-        <Route exact path="/" element={<Body />} />
-        <Route  path="/preview" element={<PreviewLinks />} />
-      </Routes>
+      <Suspense fallback={<div className="flex justify-center items-center text-indigo-500 h-screen">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Body />} />
+          <Route path="/preview" element={<PreviewLinks />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
