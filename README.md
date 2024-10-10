@@ -1,8 +1,34 @@
-# React + Vite
+# Link Sharing App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and interactive link-sharing application built with React and Vite. This project allows users to share, organize, and manage links effectively.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features
+
+- Drag and drop functionality using `react-dnd`
+- Dynamic routing with `react-router-dom`
+- Customizable select inputs with `react-select`
+- Responsive design with Tailwind CSS
+
+## Tech Stack
+
+- **Frontend**: React, Tailwind CSS, React Router
+- **Build Tool**: Vite
+- **Linting**: ESLint
+
+## Getting Started
+
+Follow these instructions to set up the project on your local machine.
+
+### Prerequisites
+
+- **Node.js**: v14 or above
+- **npm**: v6 or above
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/link-sharing-app.git

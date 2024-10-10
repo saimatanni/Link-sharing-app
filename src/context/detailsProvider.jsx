@@ -1,6 +1,6 @@
 // DetailsContext.js
 import { createContext, useContext, useState } from "react";
-
+import { v4 as uuidv4 } from "uuid";
 // Create the context
 const DetailsContext = createContext();
 
@@ -16,21 +16,11 @@ export const DetailsProvider = ({ children }) => {
   });
 
   // State for links
-  const [profileLinks, setProfileLinks] = useState([
-    {
-      id: 1,
-      platform: "",
-      url: "",
-      color: "",
-    },
+  const [links, setLinks] = useState([
+    { id: uuidv4(), platform: "", url: "", error: "" },
    
     
-    {
-      id: 2,
-      platform: "",
-      url: "",
-      color: "",
-    },
+    
   ]);
 
   // Function to update profile details
@@ -39,14 +29,14 @@ export const DetailsProvider = ({ children }) => {
   };
 
   // Function to add, update, or remove a link
-  const addLink = (newLink) => setProfileLinks([...profileLinks, newLink]);
+  const addLink = (newLink) => setLinks([...links, newLink]);
   const updateLink = (updatedLink) => {
-    setProfileLinks(
-      profileLinks.map((link) => (link.id === updatedLink.id ? updatedLink : link))
+    setLinks(
+      links.map((link) => (link.id === updatedLink.id ? updatedLink : link))
     );
   };
   const removeLink = (linkId) => {
-    setProfileLinks(profileLinks.filter((link) => link.id !== linkId));
+    setLinks(links.filter((link) => link.id !== linkId));
   };
 
   return (
@@ -55,8 +45,8 @@ export const DetailsProvider = ({ children }) => {
         profileDetails,
         setProfileDetails,
         updateProfileDetails,
-        profileLinks,
-        setProfileLinks,
+        links,
+        setLinks,
         addLink,
         updateLink,
         removeLink,

@@ -1,13 +1,15 @@
 import "./App.css";
 
-import Header from "./component/Header";
 import Body from "./pages/Body";
-
+import { Routes, Route } from "react-router-dom";
+import PreviewLinks from "./pages/PreviewLinks";
 function App() {
   return (
-    <div className="p-4">
-      <Header />
-      <Body />
+    <div>
+      <Routes>
+        <Route exact path="/" element={<Body />} />
+        <Route exact path="/preview" element={<PreviewLinks />} />
+      </Routes>
     </div>
   );
 }

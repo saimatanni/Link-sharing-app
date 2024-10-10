@@ -1,6 +1,6 @@
 // MobilePreview.js
 
-import { BsGithub, BsYoutube, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsYoutube, BsLinkedin, BsTwitter } from "react-icons/bs";
 import mobileframe from "../assets/mobile_frame.png";
 import { useDetails } from "../context/detailsProvider";
 
@@ -8,23 +8,18 @@ const platformIcons = {
   GitHub: BsGithub,
   YouTube: BsYoutube,
   LinkedIn: BsLinkedin,
+  Twitter: BsTwitter,
 };
 
 const MobilePreview = () => {
-  const { profileDetails, profileLinks } = useDetails();
+  const { profileDetails, links } = useDetails();
 
-  // Ensure we have 5 slots, filling with placeholders if links are missing
-  // const displayLinks = [...links, ...Array(5 - links.length).fill({})].slice(
-  //   0,
-  //   5
-  // );
   const displayLinks = [
-    ...profileLinks,
-    ...Array(Math.max(5 - profileLinks.length, 0)).fill({}),
+    ...links,
+    ...Array(Math.max(3 - links.length, 0)).fill({}),
   ];
-  // Check if profile data is complete
-  const isProfileLoaded =
-    profileDetails.firstName && profileDetails.lastName && profileDetails.email;
+
+  const isProfileLoaded = profileDetails.firstName && profileDetails.lastName;
 
   return (
     <div className="flex items-center justify-center p-8">
@@ -33,45 +28,40 @@ const MobilePreview = () => {
         className="flex items-center justify-center bg-center bg-no-repeat bg-contain "
         style={{ backgroundImage: `url(${mobileframe})` }}
       >
-        <div className="w-[280px] h-[560px] sm:w-[308px] sm:h-[632px] lg:w-[360px] lg:h-[700px] flex items-center justify-center">
+        <div className="w-[280px] h-[560px] sm:w-[308px] sm:h-[480] lg:w-[360px] lg:h-[560px] flex items-center justify-center">
           {/* Inner Scrollable Content Container */}
-          <div className="w-[240px] h-[480px] sm:w-[270px] sm:h-[540px] lg:w-[310px] lg:max-h-[600px] bg-white rounded-[20px] md:rounded-[30px] overflow-y-auto p-4 sm:p-6">
+          <div className="w-[240px] h-[480px] sm:w-[250px] sm:h-[440px] lg:w-[250px] lg:max-h-[480px] bg-white rounded-[20px] md:rounded-[30px] overflow-y-auto p-4 sm:p-6 custom-scrollbar">
             {/* Profile Section */}
             <div className="flex flex-col items-center justify-center">
               {profileDetails.profileImage ? (
                 <img
                   src={profileDetails.profileImage}
                   alt="Profile"
-                  className="w-20 h-20 mb-4 bg-gray-200 rounded-full sm:w-24 sm:h-24"
+                  className="w-20 h-20 mb-4 bg-gray-200 border-4 rounded-full border-indigo-500/100 sm:w-24 sm:h-24"
                 />
               ) : (
-                <div className="w-20 h-20 mb-4 bg-gray-200 rounded-full sm:w-24 sm:h-24 animate-pulse"></div>
+                <div className="w-20 h-10 mb-4 bg-gray-200 rounded-full sm:w-24 sm:h-24 animate-pulse "></div>
               )}
 
               {isProfileLoaded ? (
                 <>
-                  {/* Profile Name */}
                   <h2 className="mb-1 text-lg font-bold sm:text-xl">
                     {profileDetails.firstName} {profileDetails.lastName}
                   </h2>
-                  {/* Profile Email */}
                   <p className="mb-6 text-sm text-gray-500 sm:text-base">
                     {profileDetails.email}
                   </p>
                 </>
               ) : (
                 <>
-                  {/* Name Skeleton */}
-                  <div className="w-24 h-5 mb-2 bg-gray-200 rounded-md sm:w-32 sm:h-6 animate-pulse"></div>
-                  {/* Email Skeleton */}
-                  <div className="h-3 mb-6 bg-gray-200 rounded-md w-36 sm:w-48 sm:h-4 animate-pulse"></div>
+                  <div className="w-24 h-4 mb-2 bg-gray-200 rounded-full sm:w-32 sm:h-6 animate-pulse"></div>
+                  <div className="h-3 mb-6 bg-gray-200 rounded-full w-36 sm:w-48 sm:h-4 animate-pulse"></div>
                 </>
               )}
             </div>
             {/* Links Section */}
             <div className="w-full space-y-3 sm:space-y-4">
               {displayLinks.map((link, index) => {
-                // Check if platform and url exist
                 const hasContent = link.platform && link.url;
                 const Icon = platformIcons[link.platform] || null;
 
@@ -88,6 +78,8 @@ const MobilePreview = () => {
                         ? "bg-red-500"
                         : link.platform === "LinkedIn"
                         ? "bg-blue-500"
+                        : link.platform === "Twitter"
+                        ? "bg-blue-400"
                         : "bg-gray-200 text-gray-300"
                     }`}
                   >

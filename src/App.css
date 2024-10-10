@@ -13,3 +13,26 @@ body {
   padding: 0;
 }
 
+/* custom-scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Background of the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(99, 59, 254, 0.3); /* Purple color for the scrollbar */
+  border-radius: 4px; /* Rounded edges for the scrollbar */
+  border: 2px solid white; /* Adds padding between scrollbar and track */
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(99, 59, 254, 0.3); /* Darker purple on hover */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox scrollbar width */
+  scrollbar-color: rgba(99, 59, 254, 0.3) transparent;
+}
