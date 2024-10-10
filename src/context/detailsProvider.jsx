@@ -18,9 +18,6 @@ export const DetailsProvider = ({ children }) => {
   // State for links
   const [links, setLinks] = useState([
     { id: uuidv4(), platform: "", url: "", error: "" },
-   
-    
-    
   ]);
 
   // Function to update profile details

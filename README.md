@@ -1,6 +1,6 @@
 # Link Sharing App
 
-A simple and interactive link-sharing application built with React and Vite. This project allows users to share, organize, and manage links effectively.
+A simple and interactive link-sharing application built with React, Vite and Tailwind CSS. This project allows users to share, organize, and manage links effectively.
 
 
 
@@ -31,12 +31,12 @@ Follow these instructions to set up the project on your local machine.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/link-sharing-app.git
+   git clone https://github.com/saimatanni/Link-sharing-app.git
 
 2. Navigate into the project directory:
 
    ```bash
-   cd link-sharing-app
+   cd Link-sharing-app
 
 3. Install dependencies:
 

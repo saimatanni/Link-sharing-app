@@ -36,3 +36,10 @@ body {
   scrollbar-width: thin; /* Firefox scrollbar width */
   scrollbar-color: rgba(99, 59, 254, 0.3) transparent;
 }
+.draggable-item {
+  touch-action: none; /* Prevents scrolling during dragging on mobile */
+}
+
+.opacity-50 {
+  transition: opacity 0.2s ease;
+}

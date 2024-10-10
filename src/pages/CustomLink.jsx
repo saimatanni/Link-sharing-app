@@ -8,18 +8,17 @@ import DraggableLink from "../component/links/DraggableLink";
 import { platforms } from "../utils/data";
 
 // Check if the device is touch-enabled
+
 const isTouchDevice = () => {
   return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 };
-
 const CustomLink = () => {
   const { setLinks, links } = useDetails();
-
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const addNewLink = () => {
-    setLinks([...links, { id: uuidv4(), platform: "", url: "", error: "" }]);
+    setLinks([...links, { id: uuidv4(), platform: "", url: "", platformError: "", urlError: "" }]);
   };
 
   const removeLink = (id) => {
@@ -28,36 +27,55 @@ const CustomLink = () => {
 
   const handleChange = (id, field, value) => {
     setLinks(
-      links.map((link) =>
-        link.id === id ? { ...link, [field]: value, error: "" } : link
-      )
+      links.map((link) => {
+        if (link.id === id) {
+          const updatedLink = { ...link, [field]: value };
+          if (field === "platform") {
+            updatedLink.platformError = "";
+          }
+          if (field === "url") {
+            updatedLink.urlError = "";
+          }
+          return updatedLink;
+        }
+        return link;
+      })
     );
   };
 
   const handleSave = () => {
     const updatedLinks = links.map((link) => {
+      let platformError = "";
+      let urlError = "";
+
+      if (!link.platform) {
+        platformError = "Platform is required.";
+      }
+
       if (!link.url.trim()) {
-        return { ...link, error: "URL is required." };
+        urlError = "URL is required.";
+      } else {
+        const selectedPlatform = platforms.find((p) => p.name === link.platform);
+        if (selectedPlatform && !selectedPlatform.pattern.test(link.url)) {
+          urlError = `Invalid URL format for ${selectedPlatform.name}.`;
+        }
       }
 
-      const selectedPlatform = platforms.find((p) => p.name === link.platform);
-      if (selectedPlatform && !selectedPlatform.pattern.test(link.url)) {
-        return {
-          ...link,
-          error: `Invalid URL format for ${selectedPlatform.name}.`,
-        };
-      }
-
-      return { ...link, error: "" };
+      return {
+        ...link,
+        platformError,
+        urlError,
+      };
     });
 
-    const hasErrors = updatedLinks.some((link) => link.error);
+    const hasErrors = updatedLinks.some(
+      (link) => link.platformError || link.urlError
+    );
     if (!hasErrors) {
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
         setSuccessMessage("Links saved successfully!");
-
         setTimeout(() => setSuccessMessage(""), 3000);
       }, 1500);
     } else {
@@ -73,14 +91,20 @@ const CustomLink = () => {
   };
 
   return (
-    <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
-      <div className="relative w-full cursor-move min-h-[80vh] ">
+    <DndProvider
+      backend={isTouchDevice() ? TouchBackend : HTML5Backend}
+      options={
+        isTouchDevice()
+          ? { enableMouseEvents: true, scrollAngleRanges: [{ start: 30, end: 150 }] }
+          : undefined
+      }
+    >
+      <div className="relative w-full cursor-move min-h-[80vh]">
         <h1 className="mt-4 mb-3 text-2xl font-bold text-gray-800">
           Customize your links
         </h1>
         <p className="mb-8 text-gray-600">
-          Add/edit/remove links below and then share all your profiles with the
-          world!
+          Add/edit/remove links below and then share all your profiles with the world!
         </p>
 
         <button
@@ -90,8 +114,7 @@ const CustomLink = () => {
           + Add new link
         </button>
 
-        {/* Links Section with Scrollable Container */}
-        <div className="max-h-[60vh]  pr-2 min-h-full custom-scrollbar overflow-y-auto mb-4">
+        <div className="max-h-[60vh] pr-2 min-h-full custom-scrollbar overflow-y-auto mb-4">
           {links.map((link, index) => (
             <DraggableLink
               key={link.id}

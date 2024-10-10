@@ -1,6 +1,6 @@
 // PreviewLinks.js
 
-import { FaGithub, FaYoutube, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaYoutube, FaLinkedin, FaTwitter } from "react-icons/fa";
 import PreviewHeader from "../component/PreviewHeader";
 import { useDetails } from "../context/detailsProvider";
 
@@ -8,12 +8,14 @@ const platformIcon = {
   GitHub: <FaGithub />,
   YouTube: <FaYoutube />,
   LinkedIn: <FaLinkedin />,
+  Twitter: <FaTwitter />,
 };
 
 const platformColor = {
   GitHub: "bg-black",
   YouTube: "bg-red-600",
   LinkedIn: "bg-blue-600",
+  Twitter: "bg-blue-400",
 };
 
 const PreviewLinks = () => {
@@ -25,7 +27,7 @@ const PreviewLinks = () => {
       <PreviewHeader />
 
       {/* Profile Card */}
-      <div className="absolute flex flex-col items-center w-full max-w-sm p-12 bg-white shadow-2xl rounded-3xl top-44">
+      <div className="absolute flex flex-col items-center w-full  max-w-xs p-12 bg-white shadow-2xl rounded-3xl top-44">
         {/* Profile Image */}
         <div className="w-24 h-24 mb-4 overflow-hidden border-4 border-indigo-600 rounded-full">
           <img

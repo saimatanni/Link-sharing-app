@@ -4,19 +4,16 @@ import { BiLink } from "react-icons/bi";
 import Select from "react-select";
 import PropTypes from "prop-types";
 
-const DraggableLink = ({
-  index,
-  link,
-  platforms,
-  moveLink,
-  handleChange,
-  removeLink,
-}) => {
+
+
+// DraggableLink Component
+const DraggableLink = ({ index, link, platforms, moveLink, handleChange, removeLink }) => {
   const ref = useRef(null);
 
   const [, drop] = useDrop({
     accept: "link",
     hover: (draggedItem) => {
+      if (!ref.current) return;
       if (draggedItem.index !== index) {
         moveLink(draggedItem.index, index);
         draggedItem.index = index;
@@ -51,7 +48,6 @@ const DraggableLink = ({
       display: "flex",
       alignItems: "center",
       gap: "0.5rem",
-      //   zIndex:1000,
     }),
   };
 
@@ -71,7 +67,7 @@ const DraggableLink = ({
       ref={ref}
       className={`mb-5 p-4 bg-gray-100 rounded-lg border border-gray-200 ${
         isDragging ? "opacity-50" : "opacity-100"
-      }`}
+      } draggable-item`}
     >
       <div className="flex items-center justify-between mb-4">
         <span className="font-semibold text-gray-800">Link #{index + 1}</span>
@@ -89,21 +85,18 @@ const DraggableLink = ({
       <Select
         options={platformOptions}
         value={
-          platformOptions.find(
-            (option) => option && option.value === link.platform
-          ) || null
+          platformOptions.find((option) => option && option.value === link.platform) || null
         }
         onChange={(selectedOption) =>
-          handleChange(
-            link.id,
-            "platform",
-            selectedOption ? selectedOption.value : null
-          )
+          handleChange(link.id, "platform", selectedOption ? selectedOption.value : null)
         }
         styles={customStyles}
         placeholder="Select a platform"
         isClearable
       />
+      {link.platformError && (
+        <p className="mt-1 text-sm text-red-500">{link.platformError}</p>
+      )}
 
       <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
         Link
@@ -119,8 +112,8 @@ const DraggableLink = ({
             placeholder="https://www.example.com"
           />
         </div>
-        {link.error && (
-          <p className="mt-1 text-sm text-red-500">{link.error}</p>
+        {link.urlError && (
+          <p className="mt-1 text-sm text-red-500">{link.urlError}</p>
         )}
       </div>
     </div>
@@ -132,8 +125,9 @@ DraggableLink.propTypes = {
   link: PropTypes.shape({
     id: PropTypes.string.isRequired,
     platform: PropTypes.string,
+    platformError: PropTypes.string,
     url: PropTypes.string.isRequired,
-    error: PropTypes.string,
+    urlError: PropTypes.string,
   }).isRequired,
   platforms: PropTypes.arrayOf(
     PropTypes.shape({
