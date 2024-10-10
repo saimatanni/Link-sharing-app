@@ -15,7 +15,6 @@ const isTouchDevice = () => {
 const CustomLink = () => {
   const { setLinks, links } = useDetails();
 
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
