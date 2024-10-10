@@ -48,4 +48,8 @@ Follow these instructions to set up the project on your local machine.
    ```bash
    npm run dev
 
+
+---
+Design and develop :heart: by **Shaima Alam Tanni**.
+
  
