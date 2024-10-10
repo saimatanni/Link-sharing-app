@@ -8,7 +8,7 @@ function App() {
     <div>
       <Routes>
         <Route exact path="/" element={<Body />} />
-        <Route exact path="/preview" element={<PreviewLinks />} />
+        <Route  path="/preview" element={<PreviewLinks />} />
       </Routes>
     </div>
   );
